@@ -74,6 +74,7 @@ class cMCTS:
         self.root_data = root_data
         self.perturbate = perturbate
         self.evaluate = evaluate
+
         self.n_iterations = kwargs.get('n_iterations', 200)
         self.n_expand = kwargs.get('n_expand', 10)
         self.n_playouts = kwargs.get('n_playouts', 20)
