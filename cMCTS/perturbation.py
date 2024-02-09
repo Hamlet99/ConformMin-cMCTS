@@ -3,13 +3,24 @@ from random import random
 
 
 class Perturbation:
+    """
+    Base class for perturbation functions. The perturbation function is used to perturb
+    the parameters of the data in the MCTS algorithm.
+
+    :param max_mutation:  maximum mutation allowed
+    :type max_mutation:  float
+    """
     def __init__(self, max_mutation):
+        """
+        Constructor method
+        """
         self.max_mutation = max_mutation
 
     @staticmethod
     def scale(depth, a, max_depth):
         """
         Scale the mutation based on the depth of the tree.
+
         :param depth:  depth of the tree.
         :type depth:  int
         :param a:  scaling parameter
@@ -30,6 +41,7 @@ class Perturbation:
     def perturb(self, parameters, depth, a, max_depth):
         """
         Perturb the parameters by a random amount.
+
         :param parameters:  list of parameters to be perturbed
         :type parameters:  list
         :param depth:  depth of the tree

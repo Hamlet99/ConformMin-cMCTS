@@ -15,9 +15,16 @@ class Environment:
     """
     The Environment class is a wrapper for the RDKit molecule object. It provides methods for generating a 3D
     conformer, enumerating the torsions, and evaluating a set of parameters by generating a new conformation and
-    calculating its energy.
+    calculating its energy. Environment contains information about its mol: molecule, mol_3D: 3D conformer,
+    and torsion_atoms: list of lists, where each list contains the atom indices of the four atoms defining a torsion.
+
+    :param smiles:  SMILES representation of the molecule
+    :type smiles:  str
     """
     def __init__(self, smiles):
+        """
+        Constructor method
+        """
         self.mol = Chem.MolFromSmiles(smiles)  # RDKit molecule object
         self.mol_3D = self.generate_conformer()
         self.torsion_atoms = self.enumerate_torsions()
@@ -25,6 +32,7 @@ class Environment:
     def draw(self):
         """
         Draw the molecule with the torsion atoms highlighted.
+
         :return:  a grid of molecular images with the torsion atoms highlighted
         :rtype:  PIL object
         """
@@ -45,6 +53,7 @@ class Environment:
         def remove_dihedrals_describing_same_conformation(listoflists):
             """
             Remove dihedrals that describe the same conformation.
+
             :param listoflists:  list of lists, where each list contains indices of four atoms defining a torsion
             :type listoflists:  list
             :return: list of lists, where each list contains indices of four atoms defining a unique torsion
@@ -93,6 +102,7 @@ class Environment:
     def generate_conformer(self):
         """
         Generate a 3D conformer of the molecule.
+
         :return:  3D RDKit molecule object with a single conformer
         :rtype:  RDKit molecule object
         """
@@ -106,7 +116,9 @@ class Environment:
 
     @staticmethod
     def get_conformer_energy(conformer):
-        """ Get the energy of a conformer using the MMFF force field.
+        """
+        Get the energy of a conformer using the MMFF force field.
+
         :param conformer:  conformation of the molecule
         :type conformer:  RDKit molecule object
         :return:  energy of the conformer
@@ -119,6 +131,7 @@ class Environment:
     def create_root_parameters(self):
         """
         Create a set of random parameters for the torsions in the molecule.
+
         :return:  list of random parameters for the torsions
         :rtype:  list
         """
@@ -128,6 +141,7 @@ class Environment:
     def mol_from_parameters(self, mol, parameters):
         """
         Generate a new molecule with a given set of torsion angles.
+
         :param mol:  RDKit molecule object to be modified
         :type mol:  RDKit molecule object
         :param parameters:  list of torsion angles to be applied to the molecule
@@ -143,6 +157,7 @@ class Environment:
     def evaluate(self, parameters):
         """
         Evaluate a set of parameters by generating a new conformation and calculating its energy.
+
         :param parameters:  list of torsion angles to be applied to the molecule
         :type parameters:  list
         :return:  list of parameters and the energy of the new conformation
