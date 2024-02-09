@@ -103,7 +103,7 @@ class cMCTS:
         for i in range(self.n_playouts):
             idx += 1
             playdata = self.perturbate(self.parameter_list[initial_node], depth=self.nodes[initial_node].depth,
-                                       a=self.a, maxdepth=self.max_depth)
+                                       a=self.a, max_depth=self.max_depth)
             playdata_params, play_energy = self.evaluate(playdata)
             self.score_list.append(play_energy)
             self.parameter_list.append(playdata_params)
@@ -134,7 +134,7 @@ class cMCTS:
         depth = self.nodes[parent_node].depth + 1
         self.nodes.update({idx: Node(idx, depth, parent_node)})
 
-        data = self.perturbate(self.parameter_list[best_play_index], depth=depth, a=self.a, maxdepth=self.max_depth)
+        data = self.perturbate(self.parameter_list[best_play_index], depth=depth, a=self.a, max_depth=self.max_depth)
         parameters, energy = self.evaluate(data)
         self.score_list.append(energy)
         # depending on the application, parameters might be the same as perturbed data
@@ -232,16 +232,23 @@ class cMCTS:
 
         print(f"Results written to {out_path} file.")
 
-    def plot_minimization(self):
+    def plot_minimization(self, lim_iterations=None):
         """
         Plot the minimization of the energy function over the course of the MCTS algorithm.
 
+        :param lim_iterations:  The limits of the x-axis. Default is [0, 1000].
+        :type lim_iterations:  list
         :return: None
         """
+
+        if lim_iterations is None:
+            lim_iterations = [0, 1000]
+
         import matplotlib.pyplot as plt
         plt.style.use('ggplot')
+        plt.xlim(lim_iterations)
         plt.plot([*range(len(self.score_list))], self.score_list)
-        plt.xlabel('Iterations')
+        plt.xlabel('Evaluations')
         plt.ylabel('Energy (kcal/mol)')
         plt.show()
 

@@ -1,0 +1,8 @@
+{
+    "n_iterations": 200,
+    "n_expand": 10,
+    "n_playouts": 20,
+    "explore_constant": 1.0,
+    "max_depth": 12,
+    "a": 3
+}

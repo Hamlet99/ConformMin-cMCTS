@@ -55,12 +55,11 @@ class Perturbation:
         """
 
         x = parameters.copy()
-        u = np.random.normal(0.0, 360.0, len(x))
+        u = np.random.normal(0.0, 360.0, len(x))  # generate a random vector
         delta = (
-                (u / np.linalg.norm(u)) * self.max_mutation * self.scale(depth, a, max_depth)
+                (u / np.linalg.norm(u)) * self.max_mutation * self.scale(depth, a, max_depth)  # scale the mutation
         )
-        x += delta
-        x[x > 360] = 360
-        x[x < 0] = 0
+        x += delta  # perturb the parameters
+        np.clip(x, 0, 360, out=x)  # clip the parameters to be between 0 and 360
 
         return x

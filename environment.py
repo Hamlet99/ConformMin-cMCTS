@@ -132,7 +132,7 @@ class Environment:
         """
         Create a set of random parameters for the torsions in the molecule.
 
-        :return:  list of random parameters for the torsions
+        :return:  list of random parameters for the torsions. The values are between 0 and 360.
         :rtype:  list
         """
         parameters = np.random.uniform(0, 360, len(self.torsion_atoms))
