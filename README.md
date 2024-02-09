@@ -6,12 +6,11 @@ Continuous Monte Carlo Tree Search (cMCTS) algorithm was implemented based on pa
 
 
 ## Installation
-To install the package, you can use the following commands:
+To install the package, you can use `pip` after cloning the repository to your local machine. 
 ```bash
 git clone git@github.com:Hamlet99/ConformMin-cMCTS.git
 cd /path/to/ConformMin-cMCTS/
-conda install --name myenv --file spec-file.txt
-conda activate myenv
+pip install -e .
 ```
 
 ## Usage
