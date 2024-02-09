@@ -25,7 +25,8 @@ class Environment:
     def draw(self):
         """
         Draw the molecule with the torsion atoms highlighted.
-        :return:  A grid of molecular images in a PIL object for a PNG image file
+        :return:  a grid of molecular images with the torsion atoms highlighted
+        :rtype:  PIL object
         """
         highlight_atoms = [i[1:3] for i in self.torsion_atoms]
         mols_to_draw = [Chem.AddHs(self.mol)]*len(self.torsion_atoms)
@@ -36,11 +37,19 @@ class Environment:
         Enumerate all the torsions in the molecule  (i.e., all the rotatable bonds).
 
         :return:  list of lists, where each list contains the atom indices of the four atoms defining a torsion
+        :rtype:  list
         """
         torsion_smarts = '[!$(*#*)&!D1]-!@[!$(*#*)&!D1]'
 
         # Implemented from the https://sourceforge.net/p/rdkit/mailman/message/34554615/ with modifications.
         def remove_dihedrals_describing_same_conformation(listoflists):
+            """
+            Remove dihedrals that describe the same conformation.
+            :param listoflists:  list of lists, where each list contains indices of four atoms defining a torsion
+            :type listoflists:  list
+            :return: list of lists, where each list contains indices of four atoms defining a unique torsion
+            :rtype:  list
+            """
             final_dihedrals = []
             for item in listoflists:
                 if len(final_dihedrals) == 0:
@@ -84,7 +93,8 @@ class Environment:
     def generate_conformer(self):
         """
         Generate a 3D conformer of the molecule.
-        :return:  3D RDKit molecule object with
+        :return:  3D RDKit molecule object with a single conformer
+        :rtype:  RDKit molecule object
         """
         m = copy.deepcopy(self.mol)
         m_h = Chem.AddHs(m)
@@ -97,8 +107,10 @@ class Environment:
     @staticmethod
     def get_conformer_energy(conformer):
         """ Get the energy of a conformer using the MMFF force field.
-        :param conformer:  RDKit molecule object
+        :param conformer:  conformation of the molecule
+        :type conformer:  RDKit molecule object
         :return:  energy of the conformer
+        :rtype:  float
         """
         mp = AllChem.MMFFGetMoleculeProperties(conformer)
         ff = AllChem.MMFFGetMoleculeForceField(conformer, mp)
@@ -107,7 +119,8 @@ class Environment:
     def create_root_parameters(self):
         """
         Create a set of random parameters for the torsions in the molecule.
-        :return:  list of random parameters
+        :return:  list of random parameters for the torsions
+        :rtype:  list
         """
         parameters = np.random.uniform(0, 360, len(self.torsion_atoms))
         return parameters
@@ -115,9 +128,12 @@ class Environment:
     def mol_from_parameters(self, mol, parameters):
         """
         Generate a new molecule with a given set of torsion angles.
-        :param mol:  RDKit molecule object
-        :param parameters:  list of torsion angles
-        :return:  new RDKit molecule object
+        :param mol:  RDKit molecule object to be modified
+        :type mol:  RDKit molecule object
+        :param parameters:  list of torsion angles to be applied to the molecule
+        :type parameters:  list
+        :return:  new conformation created by applying the torsion angles
+        :rtype:  RDKit molecule object
         """
         for n, indices in enumerate(self.torsion_atoms):
             at1, at2, at3, at4 = indices
@@ -127,8 +143,10 @@ class Environment:
     def evaluate(self, parameters):
         """
         Evaluate a set of parameters by generating a new conformation and calculating its energy.
-        :param parameters:  list of torsion angles
+        :param parameters:  list of torsion angles to be applied to the molecule
+        :type parameters:  list
         :return:  list of parameters and the energy of the new conformation
+        :rtype:  list
         """
         new_conformation = self.mol_from_parameters(self.mol_3D, parameters)
         return [parameters, self.get_conformer_energy(new_conformation)]
