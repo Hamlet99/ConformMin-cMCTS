@@ -1,3 +1,4 @@
+import json
 import numpy as np
 from math import log
 
@@ -31,6 +32,12 @@ class Node:
 class cMCTS:
     """
     Implements the Monte Carlo Tree Search (MCTS) algorithm.
+    The algorithm is used to minimize a function by iteratively evaluating a set of parameters. The algorithm consists
+    of four steps: selection, expansion, simulation, and back-propagation. The algorithm is initialized with a randomly
+    generated parameter list for the root node. The perturbation function is used to perturb the data, and the
+    evaluation function is used to evaluate the data. The algorithm runs for a specified number of iterations and
+    outputs the best set of parameters found. The results can be written to a file using write(),
+    and the minimization process can be visualized by plot_minimization() methods.
 
     :param root_data:  The initial randomly generated parameter list for the root node.
     :type root_data:  list
@@ -205,3 +212,36 @@ class cMCTS:
                 self.selected_node = self.backpropagation_selection()
 
             print(f"Evaluations made: {len(self.score_list)}, Best energy yet: {min(self.score_list)}")
+
+    def write(self, out_path="mcts_results.json"):
+        """
+        Write the results of the MCTS algorithm to a file. The file contains the parameters and energies of the
+        evaluated data.
+
+        :param out_path:  The path to the output file. Default is "mcts_results.json".
+        :type out_path:  str
+        :return: None
+        """
+
+        data = {
+            "Parameters": [i.tolist() for i in self.parameter_list],
+            "Energy": self.score_list
+        }
+        with open(out_path, "w") as file:
+            json.dump(data, file)
+
+        print(f"Results written to {out_path} file.")
+
+    def plot_minimization(self):
+        """
+        Plot the minimization of the energy function over the course of the MCTS algorithm.
+
+        :return: None
+        """
+        import matplotlib.pyplot as plt
+        plt.style.use('ggplot')
+        plt.plot([*range(len(self.score_list))], self.score_list)
+        plt.xlabel('Iterations')
+        plt.ylabel('Energy (kcal/mol)')
+        plt.show()
+
