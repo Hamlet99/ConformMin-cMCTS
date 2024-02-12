@@ -12,8 +12,6 @@
     <script src="_static/documentation_options.js?v=2709fde1"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex3jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]]}})</script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -41,132 +39,11 @@
 <h1>Welcome to ConformMin-cMCTS’s documentation!<a class="headerlink" href="#welcome-to-conformmin-cmcts-s-documentation" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<section id="conformmin-cmcts">
-<h2>ConformMin-cMCTS<a class="headerlink" href="#conformmin-cmcts" title="Link to this heading">¶</a></h2>
-<p><strong>ConformMin-cMCTS</strong>: Repository for conformational energy global minimization using continuous Monte Carlo Tree Search (cMCTS) algorithm.</p>
-<p>Continuous Monte Carlo Tree Search (cMCTS) algorithm was implemented based on papers listed below:</p>
-<ul class="simple">
-<li><p>Manna, S., Loeffler, T.D., Batra, R. et al. Learning in continuous action space for developing high dimensional potential energy models. Nat Commun 13, 368 (2022). <a class="reference external" href="https://doi.org/10.1038/s41467-021-27849-6">https://doi.org/10.1038/s41467-021-27849-6</a></p></li>
-<li><p>Banik, S et al. A Continuous Action Space Tree search for INverse desiGn (CASTING) framework for materials discovery. npj Comput Mater 9, 177 (2023). <a class="reference external" href="https://doi.org/10.1038/s41524-023-01128-y">https://doi.org/10.1038/s41524-023-01128-y</a></p></li>
-</ul>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<p>To install the package, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> after cloning the repository to your local machine.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Hamlet99/ConformMin-cMCTS.git
-<span class="nb">cd</span><span class="w"> </span>/path/to/ConformMin-cMCTS/
-pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
-</div>
-</section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
-<section id="specify-your-model">
-<h3>Specify your Model<a class="headerlink" href="#specify-your-model" title="Link to this heading">¶</a></h3>
-<p>Specify all parameters of the model to be solved in a <code class="docutils literal notranslate"><span class="pre">config_mcts.json</span></code> configuration file, with the following structure:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;n_iterations&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;n_expand&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;n_playouts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;explore_constant&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;max_depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_iterations&quot;</span></code> (int) The number of iterations for the MCTS algorithm. Default is 200.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_expand&quot;</span></code> (int)  The number of expansions to perform during each iteration. Default is 10.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_playouts&quot;</span></code> (int) The number of playouts to perform. Default is 20.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;explore_constant&quot;</span></code> (float) The exploration constant for the Upper Confidence Bound (UCB) formula. Default is 1.0.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_depth&quot;</span></code> (int) The maximum depth of the search tree. Default is 12.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> (float) A scaling parameter used for perturbation. Default is 3.0.</p></li>
-</ul>
-</section>
-<section id="run-the-mcts-algorithm">
-<h3>Run the MCTS algorithm<a class="headerlink" href="#run-the-mcts-algorithm" title="Link to this heading">¶</a></h3>
-<p>To run the MCTS algorithm, you can use the following code in your Python script or Jupyter notebook (<code class="docutils literal notranslate"><span class="pre">example.ipynb</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">environment</span>
-<span class="kn">from</span> <span class="nn">cMCTS</span> <span class="kn">import</span> <span class="n">mcts</span>
-<span class="kn">from</span> <span class="nn">cMCTS</span> <span class="kn">import</span> <span class="n">perturbation</span>
-
-<span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;c1cnccc1c1ccncc1NC&#39;</span>
-
-<span class="c1">#Initialize the environment and draw the marked molecule using RDKit</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
-<span class="n">root_data</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">create_root_parameters</span><span class="p">()</span>
-<span class="n">env</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-
-<span class="c1">#Initialize the perturbator</span>
-<span class="n">max_mutation</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#maximum mutation allowed</span>
-<span class="n">perturbator</span> <span class="o">=</span> <span class="n">perturbation</span><span class="o">.</span><span class="n">Perturbation</span><span class="p">(</span><span class="n">max_mutation</span><span class="p">)</span>
-
-<span class="c1"># read the config file</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config_mcts.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-
-<span class="c1"># set perturb and evaluate functions</span>
-<span class="n">perturb</span> <span class="o">=</span> <span class="n">perturbator</span><span class="o">.</span><span class="n">perturb</span>
-<span class="n">evaluate</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">evaluate</span>
-
-<span class="c1"># initialize, run cMCTS, and generate &quot;mcts_results.json&quot; file</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">mcts</span><span class="o">.</span><span class="n">cMCTS</span><span class="p">(</span><span class="n">root_data</span><span class="p">,</span> <span class="n">perturb</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
-<span class="n">optimizer</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="n">optimizer</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-
-<span class="c1"># to visualize the optimization process use the following command</span>
-<span class="n">optimizer</span><span class="o">.</span><span class="n">plot_minimization</span><span class="p">(</span><span class="n">lim_iterations</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>License
-ConformMin-cMCTS is released under the MIT License. See <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> for details.</p>
-</section>
-</section>
 </section>
 <section id="description-of-the-cmcts-algorithm">
 <h1>Description of the cMCTS algorithm<a class="headerlink" href="#description-of-the-cmcts-algorithm" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<section id="monte-carlo-tree-search-in-continuous-action-space">
-<h2>Monte Carlo Tree Search in Continuous Action Space<a class="headerlink" href="#monte-carlo-tree-search-in-continuous-action-space" title="Link to this heading">¶</a></h2>
-<p>Monte Carlo Tree Search (MCTS) is a widely employed global optimization algorithm, particularly well-known for its effectiveness in discrete search problems, prominently in gaming domains such as AlphaGo. Originating from the fusion of tree search algorithms with principles of reinforcement learning, MCTS offers a heuristic and probabilistic approach to decision-making. Initially conceived for board games, MCTS constructs a decision tree reflecting potential moves, executing a sequence of fundamental steps:</p>
-<ol class="arabic simple">
-<li><p><strong>Selection</strong>: Navigate down the tree to a leaf node.</p></li>
-<li><p><strong>Expansion</strong>: Add child nodes for unexplored moves.</p></li>
-<li><p><strong>Simulation</strong>: Conduct random playout from the new node.</p></li>
-<li><p><strong>Backpropagation</strong>: Update node statistics based on playout outcome.</p></li>
-</ol>
-<p>In Continuous Monte Carlo Tree Search (c-MCTS), adapted for non-discrete problems without a clear “win” condition operating within non-discrete spaces, each node represents a point in the global search space. Nodes act as anchor points, and the decision tree refines the total search space.</p>
-<p>Exploration and exploitation are crucial strategies in c-MCTS, where the algorithm simultaneously explores potential pathways and exploits pathways with the highest estimated value.</p>
-<section id="enhanced-exploration-and-avoiding-degeneracy">
-<h3>Enhanced Exploration and Avoiding Degeneracy<a class="headerlink" href="#enhanced-exploration-and-avoiding-degeneracy" title="Link to this heading">¶</a></h3>
-<p>Continuous action space often faces the challenge of degeneracy, where different branches converge to the same area, leading to inefficient exploration. To address this, a uniqueness criteria function is introduced, scaling down exploration for degenerate solutions and scaling up for under-explored regions:</p>
-<p><div class="math notranslate nohighlight">
-\[\ f( \vec r_i) = {1.5 \over 1 + \sum_{j \neq i}^{N_{points}} \delta (\left\lvert r_{i} - r_{j}\right\rvert)}\]</div>
-</p>
-<p><div class="math notranslate nohighlight">
-\[\ \delta (\left\lvert r_{i} - r_{j}\right\rvert) = \begin{cases} 1, &amp;  \left\lvert r_i - r_j\right\rvert\ &lt; r_{max}, \
-0, &amp; \left\lvert r_i - r_j\right\rvert\ \ge r_{max}  \end{cases} \]</div>
-</p>
-<p>where <span class="math notranslate nohighlight">\(\vec{r_i}\)</span> is the position of the <span class="math notranslate nohighlight">\(i_{th}\)</span> point, <span class="math notranslate nohighlight">\(N_{points}\)</span> is the total number of points, and <span class="math notranslate nohighlight">\(r_{max}\)</span> is the maximum distance between points. The function scales exploration down towards zero for degenerate solutions and up for unique or under-explored regions, promoting efficient search across diverse solution spaces.</p>
-<p>The node selection rule, Upper Confidence Bound for Parameters (UCP), integrates this function to guide exploration effectively:</p>
-<p><div class="math notranslate nohighlight">
-\[\ UCP(\theta_j) = -min(r_1, r_2, ..., r_{n_i}) + c \cdot f(\theta_j) \cdot \sqrt { lnN_i\over n_i }\]</div>
-</p>
-<p>where <span class="math notranslate nohighlight">\(\theta_j\)</span> represents node <span class="math notranslate nohighlight">\(j\)</span> in the c-MCTS structure, <span class="math notranslate nohighlight">\(r\)</span> is the reward for a given playout, <span class="math notranslate nohighlight">\(c\)</span> is the exploration constant, <span class="math notranslate nohighlight">\(f(\theta_j)\)</span> is the uniqueness criteria value for this node, <span class="math notranslate nohighlight">\(i\)</span> is the number of playout samples taken by this node and all of its child nodes, and <span class="math notranslate nohighlight">\(N_i\)</span>$
-is a similar value as <span class="math notranslate nohighlight">\(n_i\)</span> except it is the parent node’s playout count instead of this node’s.</p>
-</section>
-<section id="playouts-with-adaptive-sampling">
-<h3>Playouts with Adaptive Sampling<a class="headerlink" href="#playouts-with-adaptive-sampling" title="Link to this heading">¶</a></h3>
-<p>Playouts involve random sampling around a given point rather than clear “win” conditions in continuous action space. Playouts are executed by performing random vector displacements from the parameter set contained in the node, guided by the c-MCTS algorithm.  Attention is paid to the stochastic sampling process to ensure the generation of highly-representative sample points, overcoming challenges posed by the curse of dimensionality.</p>
-</section>
-<section id="exploitation-in-continuous-action-space">
-<h3>Exploitation in Continuous Action Space<a class="headerlink" href="#exploitation-in-continuous-action-space" title="Link to this heading">¶</a></h3>
-<p>Efficient convergence in continuous space requires controlling the step size to avoid randomness or overshooting. A window scaling scheme is used, adjusting the maximum vector length based on the depth of the node in the c-MCTS tree. This incremental refinement of the phase space restores correlation between parent and child nodes, ensuring logical exploration and faster convergence.</p>
-<p>For more details, refer to the 3rd section of the <a class="reference external" href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-27849-6/MediaObjects/41467_2021_27849_MOESM1_ESM.pdf">supplementary materials</a> <strong>Manna S. et al</strong>.</p>
-</section>
-</section>
 </section>
 <section id="module-cMCTS.mcts">
 <span id="documentation-of-classes-and-functions"></span><h1>Documentation of Classes and Functions<a class="headerlink" href="#module-cMCTS.mcts" title="Link to this heading">¶</a></h1>
@@ -533,25 +410,8 @@ the parameters of the data in the MCTS algorithm.</p>
   <div>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Welcome to ConformMin-cMCTS’s documentation!</a><ul>
-<li><a class="reference internal" href="#conformmin-cmcts">ConformMin-cMCTS</a></li>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#specify-your-model">Specify your Model</a></li>
-<li><a class="reference internal" href="#run-the-mcts-algorithm">Run the MCTS algorithm</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#description-of-the-cmcts-algorithm">Description of the cMCTS algorithm</a><ul>
-<li><a class="reference internal" href="#monte-carlo-tree-search-in-continuous-action-space">Monte Carlo Tree Search in Continuous Action Space</a><ul>
-<li><a class="reference internal" href="#enhanced-exploration-and-avoiding-degeneracy">Enhanced Exploration and Avoiding Degeneracy</a></li>
-<li><a class="reference internal" href="#playouts-with-adaptive-sampling">Playouts with Adaptive Sampling</a></li>
-<li><a class="reference internal" href="#exploitation-in-continuous-action-space">Exploitation in Continuous Action Space</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Welcome to ConformMin-cMCTS’s documentation!</a></li>
+<li><a class="reference internal" href="#description-of-the-cmcts-algorithm">Description of the cMCTS algorithm</a></li>
 <li><a class="reference internal" href="#module-cMCTS.mcts">Documentation of Classes and Functions</a><ul>
 <li><a class="reference internal" href="#cMCTS.mcts.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
 <li><a class="reference internal" href="#cMCTS.mcts.cMCTS"><code class="docutils literal notranslate"><span class="pre">cMCTS</span></code></a><ul>
