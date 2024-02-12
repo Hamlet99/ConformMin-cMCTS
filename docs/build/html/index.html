@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to ConformMin-cMCTS’s documentation! &#8212; ConformMin-cMCTS 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=4e71dc41" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex3jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]]}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">ConformMin-cMCTS 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to ConformMin-cMCTS’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-conformmin-cmcts-s-documentation">
+<h1>Welcome to ConformMin-cMCTS’s documentation!<a class="headerlink" href="#welcome-to-conformmin-cmcts-s-documentation" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="conformmin-cmcts">
+<h2>ConformMin-cMCTS<a class="headerlink" href="#conformmin-cmcts" title="Link to this heading">¶</a></h2>
+<p><strong>ConformMin-cMCTS</strong>: Repository for conformational energy global minimization using continuous Monte Carlo Tree Search (cMCTS) algorithm.</p>
+<p>Continuous Monte Carlo Tree Search (cMCTS) algorithm was implemented based on papers listed below:</p>
+<ul class="simple">
+<li><p>Manna, S., Loeffler, T.D., Batra, R. et al. Learning in continuous action space for developing high dimensional potential energy models. Nat Commun 13, 368 (2022). <a class="reference external" href="https://doi.org/10.1038/s41467-021-27849-6">https://doi.org/10.1038/s41467-021-27849-6</a></p></li>
+<li><p>Banik, S et al. A Continuous Action Space Tree search for INverse desiGn (CASTING) framework for materials discovery. npj Comput Mater 9, 177 (2023). <a class="reference external" href="https://doi.org/10.1038/s41524-023-01128-y">https://doi.org/10.1038/s41524-023-01128-y</a></p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>To install the package, you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> after cloning the repository to your local machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Hamlet99/ConformMin-cMCTS.git
+<span class="nb">cd</span><span class="w"> </span>/path/to/ConformMin-cMCTS/
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<section id="specify-your-model">
+<h3>Specify your Model<a class="headerlink" href="#specify-your-model" title="Link to this heading">¶</a></h3>
+<p>Specify all parameters of the model to be solved in a <code class="docutils literal notranslate"><span class="pre">config_mcts.json</span></code> configuration file, with the following structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;n_iterations&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;n_expand&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;n_playouts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;explore_constant&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max_depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_iterations&quot;</span></code> (int) The number of iterations for the MCTS algorithm. Default is 200.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_expand&quot;</span></code> (int)  The number of expansions to perform during each iteration. Default is 10.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;n_playouts&quot;</span></code> (int) The number of playouts to perform. Default is 20.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;explore_constant&quot;</span></code> (float) The exploration constant for the Upper Confidence Bound (UCB) formula. Default is 1.0.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;max_depth&quot;</span></code> (int) The maximum depth of the search tree. Default is 12.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> (float) A scaling parameter used for perturbation. Default is 3.0.</p></li>
+</ul>
+</section>
+<section id="run-the-mcts-algorithm">
+<h3>Run the MCTS algorithm<a class="headerlink" href="#run-the-mcts-algorithm" title="Link to this heading">¶</a></h3>
+<p>To run the MCTS algorithm, you can use the following code in your Python script or Jupyter notebook (<code class="docutils literal notranslate"><span class="pre">example.ipynb</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">environment</span>
+<span class="kn">from</span> <span class="nn">cMCTS</span> <span class="kn">import</span> <span class="n">mcts</span>
+<span class="kn">from</span> <span class="nn">cMCTS</span> <span class="kn">import</span> <span class="n">perturbation</span>
+
+<span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;c1cnccc1c1ccncc1NC&#39;</span>
+
+<span class="c1">#Initialize the environment and draw the marked molecule using RDKit</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+<span class="n">root_data</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">create_root_parameters</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+<span class="c1">#Initialize the perturbator</span>
+<span class="n">max_mutation</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#maximum mutation allowed</span>
+<span class="n">perturbator</span> <span class="o">=</span> <span class="n">perturbation</span><span class="o">.</span><span class="n">Perturbation</span><span class="p">(</span><span class="n">max_mutation</span><span class="p">)</span>
+
+<span class="c1"># read the config file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;config_mcts.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># set perturb and evaluate functions</span>
+<span class="n">perturb</span> <span class="o">=</span> <span class="n">perturbator</span><span class="o">.</span><span class="n">perturb</span>
+<span class="n">evaluate</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">evaluate</span>
+
+<span class="c1"># initialize, run cMCTS, and generate &quot;mcts_results.json&quot; file</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">mcts</span><span class="o">.</span><span class="n">cMCTS</span><span class="p">(</span><span class="n">root_data</span><span class="p">,</span> <span class="n">perturb</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+<span class="c1"># to visualize the optimization process use the following command</span>
+<span class="n">optimizer</span><span class="o">.</span><span class="n">plot_minimization</span><span class="p">(</span><span class="n">lim_iterations</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>License
+ConformMin-cMCTS is released under the MIT License. See <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> for details.</p>
+</section>
+</section>
+</section>
+<section id="description-of-the-cmcts-algorithm">
+<h1>Description of the cMCTS algorithm<a class="headerlink" href="#description-of-the-cmcts-algorithm" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="monte-carlo-tree-search-in-continuous-action-space">
+<h2>Monte Carlo Tree Search in Continuous Action Space<a class="headerlink" href="#monte-carlo-tree-search-in-continuous-action-space" title="Link to this heading">¶</a></h2>
+<p>Monte Carlo Tree Search (MCTS) is a widely employed global optimization algorithm, particularly well-known for its effectiveness in discrete search problems, prominently in gaming domains such as AlphaGo. Originating from the fusion of tree search algorithms with principles of reinforcement learning, MCTS offers a heuristic and probabilistic approach to decision-making. Initially conceived for board games, MCTS constructs a decision tree reflecting potential moves, executing a sequence of fundamental steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Selection</strong>: Navigate down the tree to a leaf node.</p></li>
+<li><p><strong>Expansion</strong>: Add child nodes for unexplored moves.</p></li>
+<li><p><strong>Simulation</strong>: Conduct random playout from the new node.</p></li>
+<li><p><strong>Backpropagation</strong>: Update node statistics based on playout outcome.</p></li>
+</ol>
+<p>In Continuous Monte Carlo Tree Search (c-MCTS), adapted for non-discrete problems without a clear “win” condition operating within non-discrete spaces, each node represents a point in the global search space. Nodes act as anchor points, and the decision tree refines the total search space.</p>
+<p>Exploration and exploitation are crucial strategies in c-MCTS, where the algorithm simultaneously explores potential pathways and exploits pathways with the highest estimated value.</p>
+<section id="enhanced-exploration-and-avoiding-degeneracy">
+<h3>Enhanced Exploration and Avoiding Degeneracy<a class="headerlink" href="#enhanced-exploration-and-avoiding-degeneracy" title="Link to this heading">¶</a></h3>
+<p>Continuous action space often faces the challenge of degeneracy, where different branches converge to the same area, leading to inefficient exploration. To address this, a uniqueness criteria function is introduced, scaling down exploration for degenerate solutions and scaling up for under-explored regions:</p>
+<p><div class="math notranslate nohighlight">
+\[\ f( \vec r_i) = {1.5 \over 1 + \sum_{j \neq i}^{N_{points}} \delta (\left\lvert r_{i} - r_{j}\right\rvert)}\]</div>
+</p>
+<p><div class="math notranslate nohighlight">
+\[\ \delta (\left\lvert r_{i} - r_{j}\right\rvert) = \begin{cases} 1, &amp;  \left\lvert r_i - r_j\right\rvert\ &lt; r_{max}, \
+0, &amp; \left\lvert r_i - r_j\right\rvert\ \ge r_{max}  \end{cases} \]</div>
+</p>
+<p>where <span class="math notranslate nohighlight">\(\vec{r_i}\)</span> is the position of the <span class="math notranslate nohighlight">\(i_{th}\)</span> point, <span class="math notranslate nohighlight">\(N_{points}\)</span> is the total number of points, and <span class="math notranslate nohighlight">\(r_{max}\)</span> is the maximum distance between points. The function scales exploration down towards zero for degenerate solutions and up for unique or under-explored regions, promoting efficient search across diverse solution spaces.</p>
+<p>The node selection rule, Upper Confidence Bound for Parameters (UCP), integrates this function to guide exploration effectively:</p>
+<p><div class="math notranslate nohighlight">
+\[\ UCP(\theta_j) = -min(r_1, r_2, ..., r_{n_i}) + c \cdot f(\theta_j) \cdot \sqrt { lnN_i\over n_i }\]</div>
+</p>
+<p>where <span class="math notranslate nohighlight">\(\theta_j\)</span> represents node <span class="math notranslate nohighlight">\(j\)</span> in the c-MCTS structure, <span class="math notranslate nohighlight">\(r\)</span> is the reward for a given playout, <span class="math notranslate nohighlight">\(c\)</span> is the exploration constant, <span class="math notranslate nohighlight">\(f(\theta_j)\)</span> is the uniqueness criteria value for this node, <span class="math notranslate nohighlight">\(i\)</span> is the number of playout samples taken by this node and all of its child nodes, and <span class="math notranslate nohighlight">\(N_i\)</span>$
+is a similar value as <span class="math notranslate nohighlight">\(n_i\)</span> except it is the parent node’s playout count instead of this node’s.</p>
+</section>
+<section id="playouts-with-adaptive-sampling">
+<h3>Playouts with Adaptive Sampling<a class="headerlink" href="#playouts-with-adaptive-sampling" title="Link to this heading">¶</a></h3>
+<p>Playouts involve random sampling around a given point rather than clear “win” conditions in continuous action space. Playouts are executed by performing random vector displacements from the parameter set contained in the node, guided by the c-MCTS algorithm.  Attention is paid to the stochastic sampling process to ensure the generation of highly-representative sample points, overcoming challenges posed by the curse of dimensionality.</p>
+</section>
+<section id="exploitation-in-continuous-action-space">
+<h3>Exploitation in Continuous Action Space<a class="headerlink" href="#exploitation-in-continuous-action-space" title="Link to this heading">¶</a></h3>
+<p>Efficient convergence in continuous space requires controlling the step size to avoid randomness or overshooting. A window scaling scheme is used, adjusting the maximum vector length based on the depth of the node in the c-MCTS tree. This incremental refinement of the phase space restores correlation between parent and child nodes, ensuring logical exploration and faster convergence.</p>
+<p>For more details, refer to the 3rd section of the <a class="reference external" href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-021-27849-6/MediaObjects/41467_2021_27849_MOESM1_ESM.pdf">supplementary materials</a> <strong>Manna S. et al</strong>.</p>
+</section>
+</section>
+</section>
+<section id="module-cMCTS.mcts">
+<span id="documentation-of-classes-and-functions"></span><h1>Documentation of Classes and Functions<a class="headerlink" href="#module-cMCTS.mcts" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cMCTS.mcts.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cMCTS.mcts.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.Node" title="Link to this definition">¶</a></dt>
+<dd><p>Represents a node in the Monte Carlo Tree Search (MCTS) algorithm. Each node contains information about its
+index, depth, parent, number of visits: the number of times the node has been visited, children: list of indices
+of child nodes, and playout data: list of indices representing playout data associated with the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<em>int</em>) – The index of the node.</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – The depth of the node in the search tree.</p></li>
+<li><p><strong>parent</strong> (<em>int</em><em> or </em><em>None</em>) – The index of the parent node. Default is -1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cMCTS.mcts.</span></span><span class="sig-name descname"><span class="pre">cMCTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perturbate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluate</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS" title="Link to this definition">¶</a></dt>
+<dd><p>Implements the Monte Carlo Tree Search (MCTS) algorithm.
+The algorithm is used to minimize a function by iteratively evaluating a set of parameters. The algorithm consists
+of four steps: selection, expansion, simulation, and back-propagation. The algorithm is initialized with a randomly
+generated parameter list for the root node. The perturbation function is used to perturb the data, and the
+evaluation function is used to evaluate the data. The algorithm runs for a specified number of iterations and
+outputs the best set of parameters found. The results can be written to a file using write(),
+and the minimization process can be visualized by plot_minimization() methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root_data</strong> (<em>list</em>) – The initial randomly generated parameter list for the root node.</p></li>
+<li><p><strong>perturbate</strong> (<em>function</em>) – The perturbation function to perturb the data. Output is a list of perturbed parameters.</p></li>
+<li><p><strong>evaluate</strong> (<em>function</em>) – The evaluation function to evaluate the data. Output is a list: [list of parameters, score].</p></li>
+<li><p><strong>n_iterations</strong> (<em>int</em>) – The number of iterations for the MCTS algorithm. Default is 200.</p></li>
+<li><p><strong>n_expand</strong> (<em>int</em>) – The number of expansions to perform during each iteration. Default is 10.</p></li>
+<li><p><strong>n_playouts</strong> (<em>int</em>) – The number of playouts to perform. Default is 20.</p></li>
+<li><p><strong>explore_constant</strong> (<em>float</em>) – The exploration constant for the Upper Confidence Bound (UCB) formula. Default is 1.0.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>) – The maximum depth of the search tree. Default is 12.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – A scaling parameter used for perturbation. Default is 3.0.</p></li>
+<li><p><strong>selected_node</strong> (<em>int</em>) – The currently selected node in the MCTS algorithm. Default is 0.</p></li>
+<li><p><strong>nodes</strong> (<em>dict</em>) – A dictionary containing Node objects with their respective indices as keys.</p></li>
+<li><p><strong>score_list</strong> (<em>list</em>) – A list containing scores of evaluated data. Default is [].</p></li>
+<li><p><strong>parameter_list</strong> (<em>list</em>) – A list containing all evaluated parameters. Default is [].</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.backpropagation_selection">
+<span class="sig-name descname"><span class="pre">backpropagation_selection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.backpropagation_selection" title="Link to this definition">¶</a></dt>
+<dd><p>Back-propagate and select the best node based on the Upper Confidence Bound (UCB) formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The index of the best node.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.expansion_simulation">
+<span class="sig-name descname"><span class="pre">expansion_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.expansion_simulation" title="Link to this definition">¶</a></dt>
+<dd><p>Perform the expansion and simulation steps of the MCTS algorithm. Perturb the data, evaluate it, and
+add the data and energy to the respective lists. Update the index and the selected node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent_node</strong> (<em>int</em>) – The index of the parent node.</p></li>
+<li><p><strong>idx</strong> (<em>int</em>) – The index of the node.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.get_branch">
+<span class="sig-name descname"><span class="pre">get_branch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.get_branch" title="Link to this definition">¶</a></dt>
+<dd><p>Get the branch of a given node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> (<em>int</em>) – The index of the node.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of indices representing the branch from the root node to the given node.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.playouts">
+<span class="sig-name descname"><span class="pre">playouts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.playouts" title="Link to this definition">¶</a></dt>
+<dd><p>Perform playouts for a given node. Perturb the data, evaluate it, and add the data and
+score to the respective lists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>int</em>) – The index of the node.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated index.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.plot_minimization">
+<span class="sig-name descname"><span class="pre">plot_minimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lim_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.plot_minimization" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the minimization of the energy function over the course of the MCTS algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lim_iterations</strong> (<em>list</em>) – The limits of the x-axis. Default is [0, 1000].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.run" title="Link to this definition">¶</a></dt>
+<dd><p>Run the MCTS algorithm. Perform playouts, expansion, simulation, and back-propagation for the selected node and
+prints the total number of evaluations and the current best score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.mcts.cMCTS.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mcts_results.json'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.mcts.cMCTS.write" title="Link to this definition">¶</a></dt>
+<dd><p>Write the results of the MCTS algorithm to a file. The file contains the parameters and energies of the
+evaluated data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out_path</strong> (<em>str</em>) – The path to the output file. Default is “mcts_results.json”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-cMCTS.environment">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cMCTS.environment.</span></span><span class="sig-name descname"><span class="pre">Environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment" title="Link to this definition">¶</a></dt>
+<dd><p>The Environment class is a wrapper for the RDKit molecule object. It provides methods for generating a 3D
+conformer, enumerating the torsions, and evaluating a set of parameters by generating a new conformation and
+calculating its energy. Environment contains information about its mol: molecule, mol_3D: 3D conformer,
+and torsion_atoms: list of lists, where each list contains the atom indices of the four atoms defining a torsion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smiles</strong> (<em>str</em>) – SMILES representation of the molecule</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.create_root_parameters">
+<span class="sig-name descname"><span class="pre">create_root_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.create_root_parameters" title="Link to this definition">¶</a></dt>
+<dd><p>Create a set of random parameters for the torsions in the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of random parameters for the torsions. The values are between 0 and 360.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.draw" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the molecule with the torsion atoms highlighted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a grid of molecular images with the torsion atoms highlighted</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>PIL object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.enumerate_torsions">
+<span class="sig-name descname"><span class="pre">enumerate_torsions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.enumerate_torsions" title="Link to this definition">¶</a></dt>
+<dd><p>Enumerate all the torsions in the molecule  (i.e., all the rotatable bonds).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of lists, where each list contains the atom indices of the four atoms defining a torsion</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.evaluate" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate a set of parameters by generating a new conformation and calculating its energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>list</em>) – list of torsion angles to be applied to the molecule</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of parameters and the energy of the new conformation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.generate_conformer">
+<span class="sig-name descname"><span class="pre">generate_conformer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.generate_conformer" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a 3D conformer of the molecule.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>3D RDKit molecule object with a single conformer</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>RDKit molecule object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.get_conformer_energy">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_conformer_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conformer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.get_conformer_energy" title="Link to this definition">¶</a></dt>
+<dd><p>Get the energy of a conformer using the MMFF force field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conformer</strong> (<em>RDKit molecule object</em>) – conformation of the molecule</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy of the conformer</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.environment.Environment.mol_from_parameters">
+<span class="sig-name descname"><span class="pre">mol_from_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.environment.Environment.mol_from_parameters" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a new molecule with a given set of torsion angles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mol</strong> (<em>RDKit molecule object</em>) – RDKit molecule object to be modified</p></li>
+<li><p><strong>parameters</strong> (<em>list</em>) – list of torsion angles to be applied to the molecule</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>new conformation created by applying the torsion angles</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RDKit molecule object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-cMCTS.perturbation">
+<dt class="sig sig-object py" id="cMCTS.perturbation.Perturbation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cMCTS.perturbation.</span></span><span class="sig-name descname"><span class="pre">Perturbation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_mutation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.perturbation.Perturbation" title="Link to this definition">¶</a></dt>
+<dd><p>Base class for perturbation functions. The perturbation function is used to perturb
+the parameters of the data in the MCTS algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>max_mutation</strong> (<em>float</em>) – maximum mutation allowed</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.perturbation.Perturbation.perturb">
+<span class="sig-name descname"><span class="pre">perturb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.perturbation.Perturbation.perturb" title="Link to this definition">¶</a></dt>
+<dd><p>Perturb the parameters by a random amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>list</em>) – list of parameters to be perturbed</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – depth of the tree</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – scaling parameter</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>) – maximum depth of the tree</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of perturbed parameters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cMCTS.perturbation.Perturbation.scale">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cMCTS.perturbation.Perturbation.scale" title="Link to this definition">¶</a></dt>
+<dd><p>Scale the mutation based on the depth of the tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depth</strong> (<em>int</em>) – depth of the tree.</p></li>
+<li><p><strong>a</strong> (<em>float</em>) – scaling parameter</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>) – maximum depth of the tree</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>scaling factor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cMCTS.perturbation.random">
+<span class="sig-prename descclassname"><span class="pre">cMCTS.perturbation.</span></span><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#cMCTS.perturbation.random" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to ConformMin-cMCTS’s documentation!</a><ul>
+<li><a class="reference internal" href="#conformmin-cmcts">ConformMin-cMCTS</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#specify-your-model">Specify your Model</a></li>
+<li><a class="reference internal" href="#run-the-mcts-algorithm">Run the MCTS algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#description-of-the-cmcts-algorithm">Description of the cMCTS algorithm</a><ul>
+<li><a class="reference internal" href="#monte-carlo-tree-search-in-continuous-action-space">Monte Carlo Tree Search in Continuous Action Space</a><ul>
+<li><a class="reference internal" href="#enhanced-exploration-and-avoiding-degeneracy">Enhanced Exploration and Avoiding Degeneracy</a></li>
+<li><a class="reference internal" href="#playouts-with-adaptive-sampling">Playouts with Adaptive Sampling</a></li>
+<li><a class="reference internal" href="#exploitation-in-continuous-action-space">Exploitation in Continuous Action Space</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cMCTS.mcts">Documentation of Classes and Functions</a><ul>
+<li><a class="reference internal" href="#cMCTS.mcts.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS"><code class="docutils literal notranslate"><span class="pre">cMCTS</span></code></a><ul>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.backpropagation_selection"><code class="docutils literal notranslate"><span class="pre">cMCTS.backpropagation_selection()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.expansion_simulation"><code class="docutils literal notranslate"><span class="pre">cMCTS.expansion_simulation()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.get_branch"><code class="docutils literal notranslate"><span class="pre">cMCTS.get_branch()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.playouts"><code class="docutils literal notranslate"><span class="pre">cMCTS.playouts()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.plot_minimization"><code class="docutils literal notranslate"><span class="pre">cMCTS.plot_minimization()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.run"><code class="docutils literal notranslate"><span class="pre">cMCTS.run()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.mcts.cMCTS.write"><code class="docutils literal notranslate"><span class="pre">cMCTS.write()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a><ul>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.create_root_parameters"><code class="docutils literal notranslate"><span class="pre">Environment.create_root_parameters()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.draw"><code class="docutils literal notranslate"><span class="pre">Environment.draw()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.enumerate_torsions"><code class="docutils literal notranslate"><span class="pre">Environment.enumerate_torsions()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.evaluate"><code class="docutils literal notranslate"><span class="pre">Environment.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.generate_conformer"><code class="docutils literal notranslate"><span class="pre">Environment.generate_conformer()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.get_conformer_energy"><code class="docutils literal notranslate"><span class="pre">Environment.get_conformer_energy()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.environment.Environment.mol_from_parameters"><code class="docutils literal notranslate"><span class="pre">Environment.mol_from_parameters()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cMCTS.perturbation.Perturbation"><code class="docutils literal notranslate"><span class="pre">Perturbation</span></code></a><ul>
+<li><a class="reference internal" href="#cMCTS.perturbation.Perturbation.perturb"><code class="docutils literal notranslate"><span class="pre">Perturbation.perturb()</span></code></a></li>
+<li><a class="reference internal" href="#cMCTS.perturbation.Perturbation.scale"><code class="docutils literal notranslate"><span class="pre">Perturbation.scale()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cMCTS.perturbation.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">ConformMin-cMCTS 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to ConformMin-cMCTS’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Hamlet Khachatryan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

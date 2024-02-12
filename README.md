@@ -1,7 +1,8 @@
-# ConformMin-cMCTS
-ConformMin-cMCTS: Repository for conformational energy global minimization using continuous Monte Carlo Tree Search (cMCTS) algorithm.
+## ConformMin-cMCTS
+**ConformMin-cMCTS**: Repository for conformational energy global minimization using continuous Monte Carlo Tree Search (cMCTS) algorithm.
 
-Continuous Monte Carlo Tree Search (cMCTS) algorithm was implemented based on paper below:
+Continuous Monte Carlo Tree Search (cMCTS) algorithm was implemented based on papers listed below:
+- Manna, S., Loeffler, T.D., Batra, R. et al. Learning in continuous action space for developing high dimensional potential energy models. Nat Commun 13, 368 (2022). https://doi.org/10.1038/s41467-021-27849-6
 - Banik, S et al. A Continuous Action Space Tree search for INverse desiGn (CASTING) framework for materials discovery. npj Comput Mater 9, 177 (2023). https://doi.org/10.1038/s41524-023-01128-y
 
 
