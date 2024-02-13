@@ -7,7 +7,7 @@ setup(name='ConformMin-cMCTS',
       author_email="hamlet.khachatryan@dtc.ox.ac.uk",
       packages=['cMCTS'],
       install_requires=["numpy", "pandas", "matplotlib", "sphinx", "pytest", "rdkit", "setuptools",
-                        "sphinx_mdinclude", "sphinx-math-dollar"],
+                        "sphinx_mdinclude", "sphinx-math-dollar", "ipython"],
       license='MIT',
       entry_points={
             "console_scripts": ["checkpoint = checkpoints:main"]
