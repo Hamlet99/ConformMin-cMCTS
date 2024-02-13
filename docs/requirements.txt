@@ -4,3 +4,5 @@ sphinx_autodoc_typehints==2.0.0
 sphinx_autodoc_defaultargs==0.1.2
 sphinx_mdinclude==0.5.3
 sphinx-math-dollar==1.2.1
+numpy
+matplotlib.pyplot
