@@ -8,7 +8,7 @@
 
 import os, sys
 
-sys.path.insert('../..')
+sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'ConformMin-cMCTS'
 copyright = '2024, Hamlet Khachatryan'
