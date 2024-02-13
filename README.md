@@ -1,3 +1,4 @@
+[![Documentation Status](https://readthedocs.org/projects/conformmin-cmcts/badge/?version=latest)](https://conformmin-cmcts.readthedocs.io/en/latest/?badge=latest)
 ## ConformMin-cMCTS
 **ConformMin-cMCTS**: Repository for conformational energy global minimization using continuous Monte Carlo Tree Search (cMCTS) algorithm.
 
