@@ -7,7 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import os, sys
-sys.path.insert(os.path.abspath('../..'))
+
+sys.path.insert('../..')
 
 project = 'ConformMin-cMCTS'
 copyright = '2024, Hamlet Khachatryan'
