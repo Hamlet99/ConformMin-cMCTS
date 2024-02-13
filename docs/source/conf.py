@@ -6,6 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os, sys
+sys.path.insert(os.path.abspath('../..'))
+
 project = 'ConformMin-cMCTS'
 copyright = '2024, Hamlet Khachatryan'
 author = 'Hamlet Khachatryan'
