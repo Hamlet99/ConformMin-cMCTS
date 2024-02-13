@@ -44,7 +44,7 @@ To run the MCTS algorithm, you can use the following code in your Python script 
 
 
 ``` python
-import environment
+from cMCTS import environment
 from cMCTS import mcts
 from cMCTS import perturbation
 
